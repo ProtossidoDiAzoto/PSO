@@ -18,7 +18,13 @@ public class MultiswarmPSO {
         for (int i = 0; i < numSwarms; i++) {
             swarms[i] = new Swarm(particlesPerSwarm,defaultDim);
         }
-        System.out.println("fin qui tutto bene");
+
+    }
+
+    public void startSearchingOptimal(int epoch) {
+        for (int i = 0; i < epoch; i++) {
+            this.mainLoop();
+        }
     }
 
     public void mainLoop() {
@@ -57,42 +63,11 @@ public class MultiswarmPSO {
 
             }
         }
-
-        System.out.println(bestPosition[0]+"  "+bestPosition[1]);
-        System.out.println(fitnessFunction.getFitness(bestPosition[0],bestPosition[1]));
+        printCurrentBestPosition();
     }
 
 
 
-    /*
-      public void mainLoop() {
-        for (Swarm swarm : swarms) {
-            for (Particle particle : swarm.getParticles()) {
-                double[] particleOldPosition = particle.getPosition().clone();
-                particle.setFitness(fitnessFunction.getFitness(particleOldPosition));
-                if (particle.getFitness() > particle.getBestFitness()) {
-                    particle.setBestFitness(particle.getFitness());
-                    particle.setBestPosition(particleOldPosition);
-                    if (particle.getFitness() > swarm.getBestFitness()) {
-                        swarm.setBestFitness(particle.getFitness());
-                        swarm.setBestPosition(particleOldPosition);
-                        if (swarm.getBestFitness() > bestFitness) {
-                            bestFitness = swarm.getBestFitness();
-                            bestPosition = swarm.getBestPosition().clone();
-                        }
-                    }
-                }
-
-                double[] position = particle.getPosition();
-                double[] speed = particle.getSpeed();
-                position[0] += speed[0];
-                position[1] += speed[1];
-                speed[0] = getNewParticleSpeedForIndex(particle, swarm, 0);
-                speed[1] = getNewParticleSpeedForIndex(particle, swarm, 1);
-            }
-        }
-    }
-    */
 
 
     /**
@@ -124,6 +99,22 @@ public class MultiswarmPSO {
                 * (swarm.getBestPosition()[index] - particle.getPosition()[index]))
                 + (Common.getRandomPercentageOf(Constants.GLOBAL_WEIGHT)
                 * (bestPosition[index] - particle.getPosition()[index])));
+    }
+
+    private void printCurrentBestPosition(){
+
+        String parameterLine = "";
+
+        for (int i = 0; i < defaultDim; i++) {
+            String param = "Parameter " + i + " = "+bestPosition[i];
+            parameterLine = parameterLine + param;
+        }
+
+        System.out.println(parameterLine);
+
+
+        String result = "Result = " + fitnessFunction.getFitness(bestPosition[0],bestPosition[1]);
+        System.out.println(result);
     }
 
 }

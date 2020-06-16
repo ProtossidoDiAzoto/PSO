@@ -7,9 +7,7 @@ public class MainTest1 {
         CustomFunction cf = new CustomFunction();
         //(int numSwarms, int particlesPerSwarm, FitnessFunctionInterface fitnessFunction)
         MultiswarmPSO mPSO = new MultiswarmPSO(20,5000,cf);
-        for (int i = 0; i < 10000; i++) {
-            mPSO.mainLoop();
-        }
+        mPSO.startSearchingOptimal(100);
 
     }
 }
