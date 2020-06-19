@@ -4,19 +4,24 @@ public class MultiswarmPSO {
 
     private Swarm[] swarms;
     private double[] bestPosition;
-    private double bestFitness = Double.NEGATIVE_INFINITY;
+    private double bestFitness;
     private FitnessFunctionInterface fitnessFunction;
 
-    //Default  PSOcore.Swarm(int numParticles, int dimensionality, double minPos, double maxPos)
-
-    int defaultDim = 2;
-
+    int dim;
 
     public MultiswarmPSO(int numSwarms, int particlesPerSwarm, FitnessFunctionInterface fitnessFunction) {
+
         this.fitnessFunction = fitnessFunction;
+        this.bestFitness = fitnessFunction.initializeBestFit();
+        dim = fitnessFunction.inputDimensionality();
+
+        Constants.MIN_BOUND_SWARM = fitnessFunction.minBound();
+        Constants.MAX_BOUND_SWARM = fitnessFunction.maxBound();
+
+        Common.INIT_BEST_FITNESS = fitnessFunction.initializeBestFit();
         this.swarms = new Swarm[numSwarms];
         for (int i = 0; i < numSwarms; i++) {
-            swarms[i] = new Swarm(particlesPerSwarm,defaultDim);
+            swarms[i] = new Swarm(particlesPerSwarm, dim);
         }
 
     }
@@ -27,13 +32,21 @@ public class MultiswarmPSO {
         }
     }
 
+    public double getBestFitness() {
+        return bestFitness;
+    }
+
+    public double[] getBestPosition() {
+        return bestPosition;
+    }
+
     public void mainLoop() {
 
 
         for (Swarm swarm : swarms) {
             for (Particle particle : swarm.getParticles()) {
                 double[] particleOldPosition = particle.getPosition().clone();
-                particle.setFitness(fitnessFunction.getFitness(particleOldPosition));
+                particle.setFitness(fitnessFunction.fitnessFunctionDefinition(particleOldPosition));
                 boolean isNewBestFitness = fitnessFunction.evaluationCriteria(particle.getFitness(),particle.getBestFitness());
                 if (isNewBestFitness) {
                     particle.setBestFitness(particle.getFitness());
@@ -70,6 +83,8 @@ public class MultiswarmPSO {
 
 
 
+
+
     /**
      *
      * It's essential for the particle to change its speed since
@@ -84,10 +99,10 @@ public class MultiswarmPSO {
      * random number between 0 and 1. We'll also add an inertia factor to
      * the formula which incentivizes the particle not to slow down too much:
      *
-     * @param particle
-     * @param swarm
-     * @param index
-     * @return
+     * @param particle particle taken in analysis
+     * @param swarm swarm to which the particle belongs
+     * @param index an index
+     * @return the speed
      */
 
     private double getNewParticleSpeedForIndex(Particle particle, Swarm swarm, int index) {
@@ -103,18 +118,21 @@ public class MultiswarmPSO {
 
     private void printCurrentBestPosition(){
 
+        System.out.println("============================================");
+        System.out.println("");
         String parameterLine = "";
 
-        for (int i = 0; i < defaultDim; i++) {
+        for (int i = 0; i < dim; i++) {
             String param = "Parameter " + i + " = "+bestPosition[i];
             parameterLine = parameterLine + param;
         }
 
         System.out.println(parameterLine);
+        System.out.println("");
 
-
-        String result = "Result = " + fitnessFunction.getFitness(bestPosition[0],bestPosition[1]);
+        String result = "Result = " + fitnessFunction.fitnessFunctionDefinition(bestPosition[0],bestPosition[1]);
         System.out.println(result);
+        System.out.println("");
     }
 
 }

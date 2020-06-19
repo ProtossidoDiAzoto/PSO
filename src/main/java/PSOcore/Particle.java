@@ -7,7 +7,7 @@ public class Particle {
     private double[] speed;
     private double fitness;
     private double[] bestPosition;
-    private double bestFitness = Double.NEGATIVE_INFINITY;
+    private double bestFitness = Common.INIT_BEST_FITNESS;
 
     // constructors and other methods
 

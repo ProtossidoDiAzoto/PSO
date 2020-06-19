@@ -2,8 +2,9 @@ package PSOcore;
 
 public class Constants {
 
-    public static double MIN_BOUND_SWARM = -30;
-    public static double MAX_BOUND_SWARM = 30;
+
+    public static double MIN_BOUND_SWARM = -10000;
+    public static double MAX_BOUND_SWARM = 10000;
 
     public static double INERTIA_FACTOR = 0.729;
     public static double COGNITIVE_WEIGHT = 1.49445;
