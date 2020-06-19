@@ -1,6 +1,11 @@
 package PSOcore;
 
-public class MultiswarmPSO {
+
+/**
+ * Multi-swarm optimization is a variant of particle swarm optimization (PSO)
+ * based on the use of multiple sub-swarms instead of one (standard) swarm.
+ */
+public class MultiSwarmPSO {
 
     private Swarm[] swarms;
     private double[] bestPosition;
@@ -9,7 +14,7 @@ public class MultiswarmPSO {
 
     int dim;
 
-    public MultiswarmPSO(int numSwarms, int particlesPerSwarm, FitnessFunctionInterface fitnessFunction) {
+    public MultiSwarmPSO(int numSwarms, int particlesPerSwarm, FitnessFunctionInterface fitnessFunction) {
 
         this.fitnessFunction = fitnessFunction;
         this.bestFitness = fitnessFunction.initializeBestFit();

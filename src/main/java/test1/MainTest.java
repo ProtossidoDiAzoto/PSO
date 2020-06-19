@@ -1,6 +1,7 @@
 package test1;
 
-import PSOcore.MultiswarmPSO;
+import PSOcore.BasicPSO;
+import PSOcore.MultiSwarmPSO;
 
 public class MainTest {
     public static void main(String[] args){
@@ -10,21 +11,27 @@ public class MainTest {
         switch(nFunction) {
             case 0:
                 FunctionToMaximize ftMax = new FunctionToMaximize();
-                MultiswarmPSO mPSO = new MultiswarmPSO(20,500,ftMax);
+                MultiSwarmPSO mPSO = new MultiSwarmPSO(20,500,ftMax);
                 mPSO.startSearchingOptimal(100);
                 printBestPosition(mPSO.getBestPosition(),mPSO.getBestFitness());
                 break;
             case 1:
                 FunctionToMinimize ftMin = new FunctionToMinimize();
-                MultiswarmPSO mPSO2 = new MultiswarmPSO(20,500,ftMin);
+                MultiSwarmPSO mPSO2 = new MultiSwarmPSO(20,500,ftMin);
                 mPSO2.startSearchingOptimal(100);
                 printBestPosition(mPSO2.getBestPosition(),mPSO2.getBestFitness());
                 break;
             case 2:
                 FunctionToMaximizeUnderConstraint ftMaxUC = new FunctionToMaximizeUnderConstraint();
-                MultiswarmPSO mPSO3 = new MultiswarmPSO(20,500,ftMaxUC);
+                MultiSwarmPSO mPSO3 = new MultiSwarmPSO(20,500,ftMaxUC);
                 mPSO3.startSearchingOptimal(100);
                 printBestPosition(mPSO3.getBestPosition(),mPSO3.getBestFitness());
+                break;
+            case 3:
+                FunctionToMaximize ftMaxUCb = new FunctionToMaximize();
+                BasicPSO bPSO = new BasicPSO(5000,ftMaxUCb);
+                bPSO.startSearchingOptimal(100);
+                printBestPosition(bPSO.getBestPosition(),bPSO.getBestFitness());
                 break;
             default:
                 System.out.println("Not valid");
