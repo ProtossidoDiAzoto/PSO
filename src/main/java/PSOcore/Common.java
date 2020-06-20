@@ -1,7 +1,9 @@
 package PSOcore;
 
 import java.util.Random;
-
+/**
+ * @author Lorenzo Matteucci
+ */
 public class Common {
 
     public static double INIT_BEST_FITNESS = 0;

@@ -1,5 +1,10 @@
 package PSOcore;
-
+/**
+ * @author Lorenzo Matteucci
+ *
+ * Class that define the function to optimaize
+ *
+ */
 public interface FitnessFunctionInterface {
 
     /**

@@ -4,16 +4,15 @@ import PSOcore.FitnessFunctionInterface;
 /**
  * @author Lorenzo Matteucci
  */
-public class FunctionToMinimize implements FitnessFunctionInterface {
+public class FunctionToMinimizeOneVariable implements FitnessFunctionInterface {
 
-    double bound = 100;
+    double bound = 1000;
 
     @Override
     public double fitnessFunctionDefinition(double ... particlePosition) {
         double x = particlePosition[0];
-        double y = particlePosition[1];
-        double z = 3 * Math.pow(1-x,2) * Math.exp( -Math.pow(x,2) - Math.pow(y+1,2) ) - 10 * (x/5 - Math.pow(x,3) - Math.pow(y,5) ) * Math.exp(-Math.pow(x,2)-Math.pow(y,2)) - 1/3 * Math.exp(-1*Math.pow(x+1,2)-Math.pow(y,2));
-        return z;
+        double y= Math.pow(x,4)-x;
+        return y;
     }
 
     @Override
@@ -32,7 +31,7 @@ public class FunctionToMinimize implements FitnessFunctionInterface {
 
     @Override
     public int inputDimensionality() {
-        return 2;
+        return 1;
     }
 
     @Override

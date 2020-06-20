@@ -1,7 +1,9 @@
 package test1;
 
 import PSOcore.FitnessFunctionInterface;
-
+/**
+ * @author Lorenzo Matteucci
+ */
 public class FunctionToMaximizeUnderConstraint implements FitnessFunctionInterface {
 
     double bound = 100;
@@ -15,7 +17,7 @@ public class FunctionToMaximizeUnderConstraint implements FitnessFunctionInterfa
         // Constraint
 
         if(z>8){
-            z = -1;
+            z = Double.MIN_VALUE;
         }
         
         return z;

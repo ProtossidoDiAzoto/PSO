@@ -1,6 +1,10 @@
 package PSOcore;
 
 /**
+ *
+ *   @author Lorenzo Matteucci
+ *
+ *
  *   particle swarm optimization (PSO) is a computational method that optimizes a problem by iteratively
  *   trying to improve a candidate solution with regard to a given measure of quality. It solves a problem
  *   by having a population of candidate solutions, here dubbed particles, and moving these particles around

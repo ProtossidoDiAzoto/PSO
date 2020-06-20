@@ -1,5 +1,7 @@
 package PSOcore;
-
+/**
+ * @author Lorenzo Matteucci
+ */
 public class Constants {
 
 

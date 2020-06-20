@@ -2,7 +2,9 @@ package PSOcore;
 
 import static PSOcore.Constants.MAX_BOUND_SWARM;
 import static PSOcore.Constants.MIN_BOUND_SWARM;
-
+/**
+ * @author Lorenzo Matteucci
+ */
 public class Swarm {
     private Particle[] particles;
     private double[] bestPosition;
@@ -25,8 +27,6 @@ public class Swarm {
             particles[i] = new Particle(position, velocity);
         }
     }
-
-    // methods omitted
 
 
     public Particle[] getParticles() {

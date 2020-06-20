@@ -2,6 +2,10 @@ package test1;
 
 import PSOcore.FitnessFunctionInterface;
 
+
+/**
+ * @author Lorenzo Matteucci
+ */
 public class FunctionToMaximize implements FitnessFunctionInterface {
 
     double bound = 100;

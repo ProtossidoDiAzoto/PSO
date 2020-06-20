@@ -1,5 +1,7 @@
 package PSOcore;
-
+/**
+ * @author Lorenzo Matteucci
+ */
 public class Particle {
 
 
@@ -8,9 +10,6 @@ public class Particle {
     private double fitness;
     private double[] bestPosition;
     private double bestFitness = Common.INIT_BEST_FITNESS;
-
-    // constructors and other methods
-
 
     public Particle(double[] position, double[] speed, double fitness, double[] bestPosition, double bestFitness) {
         this.position = position;

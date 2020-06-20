@@ -1,7 +1,8 @@
 package PSOcore;
 
-
 /**
+ * @author Lorenzo Matteucci
+ *
  * Multi-swarm optimization is a variant of particle swarm optimization (PSO)
  * based on the use of multiple sub-swarms instead of one (standard) swarm.
  */
@@ -33,7 +34,7 @@ public class MultiSwarmPSO {
 
     public void startSearchingOptimal(int epoch) {
         for (int i = 0; i < epoch; i++) {
-            this.mainLoop();
+            this.mainLoop(i);
         }
     }
 
@@ -45,7 +46,7 @@ public class MultiSwarmPSO {
         return bestPosition;
     }
 
-    public void mainLoop() {
+    public void mainLoop(int epoch) {
 
 
         for (Swarm swarm : swarms) {
@@ -71,17 +72,17 @@ public class MultiSwarmPSO {
                 double[] position = particle.getPosition();
                 double[] speed = particle.getSpeed();
 
-                for (int i = 0; i < position.length-1 ; i++) {
+                for (int i = 0; i < position.length ; i++) {
                     position[i] += speed[i];
                 }
 
-                for (int i = 0; i < speed.length-1; i++) {
+                for (int i = 0; i < speed.length; i++) {
                     speed[i] = getNewParticleSpeedForIndex(particle, swarm, i);
                 }
 
             }
         }
-        printCurrentBestPosition();
+        printCurrentBestPosition(epoch);
     }
 
 
@@ -121,21 +122,24 @@ public class MultiSwarmPSO {
                 * (bestPosition[index] - particle.getPosition()[index])));
     }
 
-    private void printCurrentBestPosition(){
+    private void printCurrentBestPosition(int epoch){
 
         System.out.println("============================================");
+        System.out.println("");
+        System.out.println("Iteration n "+epoch);
         System.out.println("");
         String parameterLine = "";
 
         for (int i = 0; i < dim; i++) {
-            String param = "Parameter " + i + " = "+bestPosition[i];
+            String param = "Parameter " + i+1 + " = "+bestPosition[i] + " ";
             parameterLine = parameterLine + param;
         }
 
         System.out.println(parameterLine);
         System.out.println("");
 
-        String result = "Result = " + fitnessFunction.fitnessFunctionDefinition(bestPosition[0],bestPosition[1]);
+
+        String result = "Result = " + fitnessFunction.fitnessFunctionDefinition(bestPosition);
         System.out.println(result);
         System.out.println("");
     }
